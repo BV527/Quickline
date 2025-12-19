@@ -3,12 +3,16 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { joinQueueSchema } from '@/utils/validation';
 import { queueService } from '@/services/queueService';
 import { useQueue } from '@/context/QueueContext';
 import PublicLayout from '@/layouts/PublicLayout';
-import FormInput from '@/components/FormInput';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import * as yup from 'yup';
+
+const joinQueueSchema = yup.object({
+  name: yup.string().required('Name is required'),
+  phone: yup.string().required('Phone number is required'),
+});
 
 const JoinQueuePage = () => {
   const [loading, setLoading] = useState(false);
@@ -56,21 +60,35 @@ const JoinQueuePage = () => {
           </div>
           
           <form onSubmit={handleSubmit(onSubmit)}>
-            <FormInput
-              label="Full Name"
-              type="text"
-              placeholder="Enter your full name"
-              {...register('name')}
-              error={errors.name?.message}
-            />
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Full Name
+              </label>
+              <input
+                {...register('name')}
+                type="text"
+                className="input-field"
+                placeholder="Enter your full name"
+              />
+              {errors.name && (
+                <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+              )}
+            </div>
 
-            <FormInput
-              label="Phone Number"
-              type="tel"
-              placeholder="Enter 10-digit phone number"
-              {...register('phone')}
-              error={errors.phone?.message}
-            />
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Phone Number
+              </label>
+              <input
+                {...register('phone')}
+                type="tel"
+                className="input-field"
+                placeholder="Enter 10-digit phone number"
+              />
+              {errors.phone && (
+                <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
+              )}
+            </div>
 
             <button
               type="submit"
