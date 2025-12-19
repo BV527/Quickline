@@ -2,15 +2,17 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import toast from 'react-hot-toast';
-import { verifyTicketSchema } from '@/utils/validation';
 import { queueService } from '@/services/queueService';
 import { useQueue } from '@/context/QueueContext';
 import { formatTime, maskOTP } from '@/utils/helpers';
 import AdminLayout from '@/layouts/AdminLayout';
-import FormInput from '@/components/FormInput';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import Modal from '@/components/Modal';
-import HospitalAdminLink from '@/components/HospitalAdminLink';
+import * as yup from 'yup';
+
+const verifyTicketSchema = yup.object({
+  ticketId: yup.string().required('Ticket ID is required'),
+  otp: yup.string().required('OTP is required'),
+});
 
 const AdminDashboardPage = () => {
   const [loading, setLoading] = useState(false);
@@ -261,28 +263,41 @@ const AdminDashboardPage = () => {
       </div>
 
       {/* Verify Ticket Modal */}
-      <Modal
-        isOpen={showVerifyModal}
-        onClose={() => setShowVerifyModal(false)}
-        title="Verify Ticket"
-      >
+      {showVerifyModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <h3 className="text-lg font-semibold mb-4">Verify Ticket</h3>
         <form onSubmit={handleSubmit(handleVerifyTicket)}>
-          <FormInput
-            label="Ticket ID"
-            type="text"
-            placeholder="Enter ticket ID"
-            {...register('ticketId')}
-            error={errors.ticketId?.message}
-          />
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Ticket ID
+            </label>
+            <input
+              {...register('ticketId')}
+              type="text"
+              className="input-field"
+              placeholder="Enter ticket ID"
+            />
+            {errors.ticketId && (
+              <p className="text-red-500 text-sm mt-1">{errors.ticketId.message}</p>
+            )}
+          </div>
 
-          <FormInput
-            label="OTP"
-            type="text"
-            placeholder="Enter 6-digit OTP"
-            maxLength={6}
-            {...register('otp')}
-            error={errors.otp?.message}
-          />
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              OTP
+            </label>
+            <input
+              {...register('otp')}
+              type="text"
+              className="input-field"
+              placeholder="Enter 6-digit OTP"
+              maxLength={6}
+            />
+            {errors.otp && (
+              <p className="text-red-500 text-sm mt-1">{errors.otp.message}</p>
+            )}
+          </div>
 
           <div className="flex space-x-3">
             <button
@@ -304,7 +319,9 @@ const AdminDashboardPage = () => {
             </button>
           </div>
         </form>
-      </Modal>
+          </div>
+        </div>
+      )}
     </AdminLayout>
   );
 };
