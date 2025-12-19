@@ -2,7 +2,7 @@ import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from '@/context/AuthContext';
 import { QueueProvider } from '@/context/QueueContext';
 import ErrorBoundary from '@/components/ErrorBoundary';
-import InstallPrompt from '@/components/InstallPrompt';
+
 import AppRouter from '@/routes/AppRouter';
 import { useEffect } from 'react';
 
@@ -26,7 +26,7 @@ function App() {
       <AuthProvider>
         <QueueProvider>
           <AppRouter />
-          <InstallPrompt />
+
           <Toaster
             position="top-right"
             toastOptions={{
