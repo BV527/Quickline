@@ -1,0 +1,295 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-gray-900 min-h-screen;
+    background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 25%, #81d4fa 50%, #4fc3f7 75%, #29b6f6 100%);
+    background-attachment: fixed;
+  }
+  
+  .medical-bg {
+    background: linear-gradient(135deg, #e1f5fe 0%, #b3e5fc 25%, #81d4fa 50%, #4fc3f7 75%, #29b6f6 100%);
+    background-attachment: fixed;
+    position: relative;
+  }
+  
+  .medical-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(1px);
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+  
+  .float-in {
+    animation: floatIn 1s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes floatIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-600 to-primary-700 
+           hover:from-primary-700 hover:to-primary-800 
+           text-white font-semibold py-3 px-6 rounded-xl 
+           shadow-lg hover:shadow-xl transform hover:scale-105 
+           transition-all duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-gradient-to-r from-gray-100 to-gray-200 
+           hover:from-gray-200 hover:to-gray-300 
+           text-gray-800 font-semibold py-3 px-6 rounded-xl 
+           shadow-md hover:shadow-lg transform hover:scale-105 
+           transition-all duration-200;
+  }
+  
+  .btn-success {
+    @apply bg-gradient-to-r from-green-500 to-green-600 
+           hover:from-green-600 hover:to-green-700 
+           text-white font-semibold py-3 px-6 rounded-xl 
+           shadow-lg hover:shadow-xl transform hover:scale-105 
+           transition-all duration-200;
+  }
+  
+  .btn-warning {
+    @apply bg-gradient-to-r from-orange-500 to-orange-600 
+           hover:from-orange-600 hover:to-orange-700 
+           text-white font-semibold py-3 px-6 rounded-xl 
+           shadow-lg hover:shadow-xl transform hover:scale-105 
+           transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6 border border-gray-200 
+           hover:shadow-lg hover:-translate-y-1 transition-all duration-200;
+  }
+  
+  .card-blue {
+    @apply bg-blue-50 rounded-lg shadow-md p-6 border-l-4 border-blue-400 
+           hover:shadow-lg hover:-translate-y-1 transition-all duration-200;
+  }
+  
+  .card-green {
+    @apply bg-green-50 rounded-lg shadow-md p-6 border-l-4 border-green-400 
+           hover:shadow-lg hover:-translate-y-1 transition-all duration-200;
+  }
+  
+  .card-yellow {
+    @apply bg-yellow-50 rounded-lg shadow-md p-6 border-l-4 border-yellow-400 
+           hover:shadow-lg hover:-translate-y-1 transition-all duration-200;
+  }
+  
+  .card-purple {
+    @apply bg-purple-50 rounded-lg shadow-md p-6 border-l-4 border-purple-400 
+           hover:shadow-lg hover:-translate-y-1 transition-all duration-200;
+  }
+
+  .stat-card {
+    @apply bg-white rounded-lg shadow-md p-6 border-l-4 
+           hover:shadow-lg hover:-translate-y-1 transition-all duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 border-2 border-gray-200 rounded-xl 
+           focus:outline-none focus:ring-4 focus:ring-blue-200 
+           focus:border-blue-500 transition-all duration-200 bg-white
+           hover:border-gray-300;
+  }
+  
+  /* Glassmorphism Design System */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1), 
+                0 0 0 1px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    @apply rounded-3xl p-6 transition-all duration-300;
+  }
+  
+  .glass-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.15), 
+                0 0 0 1px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  
+  .glass-card-primary {
+    background: rgba(6, 182, 212, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    box-shadow: 0 25px 50px -12px rgba(6, 182, 212, 0.2), 
+                0 0 0 1px rgba(6, 182, 212, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    @apply rounded-3xl p-6 transition-all duration-300;
+  }
+  
+  .glass-card-success {
+    background: rgba(34, 197, 94, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    @apply rounded-3xl p-6 transition-all duration-300;
+  }
+  
+  .glass-card-warning {
+    background: rgba(245, 158, 11, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    @apply rounded-3xl p-6 transition-all duration-300;
+  }
+  
+  .glass-header {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    @apply p-4 transition-all duration-300;
+  }
+  
+  .glass-button {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    @apply px-4 py-2 rounded-xl transition-all duration-300;
+  }
+  
+  .glass-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+  }
+  
+  .medical-input {
+    @apply w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 
+           rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400/50 
+           focus:border-cyan-400 transition-all duration-300 
+           placeholder-gray-600 text-gray-800;
+  }
+  
+  .medical-input:focus {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2), 0 0 20px rgba(6, 182, 212, 0.1);
+  }
+  
+  .role-selector {
+    @apply flex bg-white/20 backdrop-blur-sm rounded-xl p-1 mb-6 border border-white/30;
+  }
+  
+  .role-option {
+    @apply flex-1 py-3 px-4 text-sm font-medium rounded-lg 
+           transition-all duration-300 text-center cursor-pointer;
+  }
+  
+  .role-option.active {
+    @apply bg-white/40 text-cyan-700 shadow-sm backdrop-blur-sm;
+    box-shadow: 0 4px 15px rgba(6, 182, 212, 0.2);
+  }
+  
+  .role-option.inactive {
+    @apply text-gray-700 hover:text-cyan-700 hover:bg-white/20;
+  }
+  
+  .medical-btn {
+    @apply w-full bg-gradient-to-r from-cyan-500 to-blue-500 
+           hover:from-cyan-600 hover:to-blue-600 
+           text-white font-semibold py-4 px-6 rounded-xl 
+           shadow-lg transition-all duration-300 
+           disabled:opacity-50 disabled:cursor-not-allowed 
+           flex items-center justify-center;
+  }
+  
+  .medical-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(6, 182, 212, 0.3), 0 0 20px rgba(6, 182, 212, 0.2);
+  }
+  
+  .glass-btn-primary {
+    background: rgba(6, 182, 212, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    @apply text-white font-semibold py-3 px-6 rounded-xl 
+           shadow-lg transition-all duration-300;
+  }
+  
+  .glass-btn-primary:hover {
+    background: rgba(6, 182, 212, 0.9);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(6, 182, 212, 0.4);
+  }
+  
+  .status-badge {
+    @apply px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm;
+  }
+  
+  .status-waiting {
+    background: rgba(245, 158, 11, 0.2);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    @apply text-amber-700;
+  }
+  
+  .status-serving {
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    @apply text-green-700;
+  }
+  
+  .status-completed {
+    background: rgba(107, 114, 128, 0.2);
+    border: 1px solid rgba(107, 114, 128, 0.3);
+    @apply text-gray-700;
+  }
+  
+  .forgot-link {
+    @apply text-sm text-cyan-600 hover:text-cyan-700 font-medium 
+           transition-colors duration-200;
+  }
+  
+  .register-link {
+    @apply text-cyan-600 hover:text-cyan-700 font-medium 
+           transition-colors duration-200;
+  }
+  
+  .checkbox-custom {
+    @apply w-4 h-4 text-cyan-600 bg-white/20 border-white/30 rounded 
+           focus:ring-cyan-500 focus:ring-2;
+  }
+  
+  .password-input-container {
+    @apply relative;
+  }
+  
+  .password-toggle {
+    @apply absolute right-3 top-1/2 transform -translate-y-1/2 
+           text-gray-500 hover:text-cyan-600 cursor-pointer 
+           transition-colors duration-200;
+  }
+}
