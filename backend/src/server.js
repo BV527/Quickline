@@ -31,7 +31,11 @@ app.use(securityHeaders);
 app.use(compression());
 app.use(morgan('combined'));
 app.use(cors({
-  origin: true,
+  origin: [
+    'http://localhost:5173',
+    'https://quickline.vercel.app',
+    'https://your-vercel-domain.vercel.app'
+  ],
   credentials: true
 }));
 
